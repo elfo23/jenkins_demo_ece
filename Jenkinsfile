@@ -3,14 +3,17 @@ def postAction
 pipeline 
 {
     agent any 
-    
+
     stages 
     {
         stage ('init')
         {
             steps 
             {
-                postAction = load 'postActions.groovy'
+                script
+                {
+                    postAction = load 'postActions.groovy'
+                }
             }
         }
         stage('build') 
