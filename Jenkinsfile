@@ -46,20 +46,29 @@ pipeline
     {
         always
         {
-            postAction.alwaysPostAction()
-        }
+            script
+            {
+                postAction.alwaysPostAction()
+            }
+        } 
         failure
         {
-            postAction.failurePostAction()
-            emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
-                to: 'philipp.steinwender@edu.fh-joanneum.at'
+            script
+            {
+                postAction.failurePostAction()
+                emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+                    subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
+                    to: 'philipp.steinwender@edu.fh-joanneum.at'
 
-            //mail to: team@example.com, subject: 'The Pipeline failed :('
+                //mail to: team@example.com, subject: 'The Pipeline failed :('
+            }
         }
         success
         {
-            postAction.successPostAction()
+            script
+            {
+                postAction.successPostAction()
+            }
         }
     }
 }
