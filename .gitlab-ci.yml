@@ -1,11 +1,16 @@
+stages:
+  - build
+  - test
+
 build-job:
   stage: build
   script:
-    - echo 'Build stage: compile all code and build an executable' 
-    - sh 'make'
+    - echo "Build stage -> compile all code and build an executable"
+    - make
 
 test-job:
   stage: test
   script:
-    - echo 'Test stage: run the test cases' 
-    - sh 'build/stack_test'
+    - echo "Test stage -> run the test cases"
+    - make
+    - build/stack_test
